@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,100;1,400;1,500&display=swap');
 
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,400;10..48,500;10..48,700&family=Roboto:ital,wght@0,300;0,400;0,500;1,100;1,400;1,500&display=swap');
+
 body {
 background-color: #1f1e1e;
 color: #fff;
@@ -8,6 +10,8 @@ font-family: 'Roboto', sans-serif;
 }
 h1{
   text-align: center;
+  font-family: 'Bricolage Grotesque', sans-serif;
+/* font-family: 'Roboto', sans-serif; */
 }
 .todo-wrapper{
   background-color: #353434;
@@ -144,7 +148,7 @@ padding: 1.7rem;
   cursor: pointer;
 }
 .todo-list-item:hover{
-  transform: scale();
+  /* transform: scale(); */
 
 }
 .left h3{

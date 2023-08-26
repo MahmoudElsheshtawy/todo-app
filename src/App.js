@@ -1,31 +1,99 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import{BsCheckCircleFill}from 'react-icons/bs'
+import shortid from "shortid";
+
 function App() {
   // logic
-  // active btn background-color with usestate Hook
-  const [activeBtn ,setActiveBtn]=useState(false)
-
-// create state for all todos. in arr=>imty arr
+const [activeBtn ,setActiveBtn]=useState(false)
 const [alltodos,setAlltodos]=useState([])
-// create state for new title text=> immty string
 const [newtitle,setNewtitle]=useState("")
-// create state for new Description  text=> immty string
-const [newdiscription,setNewdiscription]=useState([])
+const [newdiscription,setNewdiscription]=useState("")
+const [Comblete,setComblete]=useState([])
+
 
 
 // handleAddtodo 
 const handleAddtodo =()=>{
   const newtodoitem ={
     title:newtitle,
-    decription:newdiscription
+    decription:newdiscription,
+    id:shortid.generate()
   };
+
+
+// add and change in the state
   // save perv sate 
   const updateTodoarr =[...alltodos];
   //push data (title,decription)in newtodoitem =>title=newtitle...
   updateTodoarr.push(newtodoitem);
   // eny change in the state evening in arr =eny update in the newtodos
-  setAlltodos(updateTodoarr)
+  setAlltodos(updateTodoarr);
+  //save data in localStorage (key, saving data)
+  localStorage.setItem('todolist', JSON.stringify(updateTodoarr));
+// becuse remove task when add task
+  setNewdiscription('')
+  setNewtitle('')
+
 }
+
+  // handleToDoDelete statetodo
+
+// reducetodo.filter((el)=> el.id !==id) =>
+const handleToDoDelete = (id) => {
+  const reducetodo = [...alltodos];
+  //هبد بالصدفه
+  reducetodo.splice(id,1)
+
+    localStorage.setItem('todolist',JSON.stringify (reducetodo));
+    setAlltodos(reducetodo)
+};
+
+// btn Comblete //
+const handlecomnblte =(index)=>{
+  let filteritem ={
+    ...alltodos[index],
+  }
+  
+  let updateCombletearr=[...Comblete];
+
+     updateCombletearr.push(filteritem)
+     setComblete(updateCombletearr)
+     localStorage.setItem('Comblete', JSON.stringify(updateCombletearr));
+
+}
+// handleCombleteDelete
+
+const handleCombleteDelete = id => {
+  let reducedCompletedTodos = [...Comblete];
+  reducedCompletedTodos.splice (id,1);
+  // console.log (reducedCompletedTodos);
+  localStorage.setItem (
+    'Comblete',
+    JSON.stringify (reducedCompletedTodos)
+  );
+  setComblete (reducedCompletedTodos);
+};
+
+
+
+
+useEffect(()=>{
+  // arry
+    let savedTodo =JSON.parse(localStorage.getItem('todolist'));
+    let saveComblete =JSON.parse(localStorage.getItem('Comblete'));
+    
+    if (savedTodo) {
+      setAlltodos(savedTodo)
+    }
+    if (saveComblete) {
+      setComblete(saveComblete)
+    }
+    
+},[])
+
+
+
+
   return (
     <div className="App">
           <h1>My To do list</h1>
@@ -57,29 +125,53 @@ const handleAddtodo =()=>{
                </div>
 {/* body: to do // cart todo */}
                {/* <div className="todo-list-item"> */}
-                 <div>
+                 
                   {
-                    alltodos.map((item,index)=>{
+                   activeBtn ===false && alltodos.map((item ,id)=>{
                       return(
-                    <>
-                    <div className="todo-list-item"  >
-                        <div className="left" key={index}>
+                    
+                 
+                     <div className="todo-list-item" key={item.id} >
+                        <div className="left" >
                          <h3>{item.title}</h3>
                          <p>{item.decription}</p>
                      </div>
-                     <div className="right">
-                          <button className="btn">
-                              <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" className="icon"><path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path> </svg>
+                     <div className="right"  >
+                          <button className="btn" onClick={()=>handleToDoDelete(id)}>
+                            <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" className="icon"><path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path> </svg>
                             </button>
-                       <BsCheckCircleFill className="icons"/>
+                       <BsCheckCircleFill className="icons" title="Comblete?" onClick={()=>handlecomnblte(id)}/>
                      </div>
                      </div>
-                    </>
+              
+           
+                    
+                      )
+                    })
+                  }
+                        {
+                   activeBtn ===true && Comblete.map((item ,id,index)=>{
+                      return(
+                     <div className="todo-list-item" key={item.id} >
+                        <div className="left" >
+                         <h3>{item.title}</h3>
+                         <p>{item.decription}</p>
+                     </div>
+                     <div className="right"  >
+                          <button className="btn" onClick={()=>handleCombleteDelete(id)}>
+                            <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" className="icon"><path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path> </svg>
+                            </button>
+                       {/* <BsCheckCircleFill className="icons" onClick={()=>handleconblte(index)}/> */}
+                     </div>
+                     </div>
+              
+           
+                    
                       )
                     })
                   }
 
-                 </div>
+                 
                {/* </div> */}
 
 
@@ -87,6 +179,7 @@ const handleAddtodo =()=>{
 
     </div>
   );
-}
+  
+                }
 
 export default App;
