@@ -96,11 +96,11 @@ useEffect(()=>{
 
   return (
     <div className="App">
-          <h1>My To do list</h1>
+          <div className="h1"><h1>My To do list</h1></div>
           <div className="todo-wrapper">
             <div className="todo-input">
                         <div className="todo-input-item">
-                            <label>Title</label>
+                            <label>Title Task</label>
                             <input type="text" placeholder="what's the task title?" value={newtitle} onChange={(e)=>setNewtitle(e.target.value)}/>
                         </div>
 
@@ -112,7 +112,7 @@ useEffect(()=>{
                         <div className="todo-input-item">
                   
                           <button type="button" className="button" onClick={handleAddtodo}>
-                            <span className="button__text">Add Item</span>
+                            <span className="button__text">Add Task</span>
                             <span className="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" stroke="currentColor" height="24" fill="none" className="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
                           </button>
 
