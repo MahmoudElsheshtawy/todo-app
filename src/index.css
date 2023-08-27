@@ -14,12 +14,9 @@ font-family: 'Roboto', sans-serif;
 .todo-wrapper{
   background-color: #353434;
   width: fit-content;
-  /* margin-left: auto;
-  margin-right: auto; */
   padding: 2%;
   margin: auto;
   margin-top: 3%;
-  /* max-height: 80vh; */
   height: fit-content;
   overflow-y: auto;
   display: flex;
@@ -109,7 +106,6 @@ font-size: 10px;}
 .button:active .button__icon {
   background-color: #2e8644;
 }
-/* 2e8644 */
 .button:active {
   border: 1px solid #54f37c;
 }
@@ -150,10 +146,7 @@ font-size: 10px;}
   margin-top: 7px;
   overflow: auto;
 
-
 }
-
-
 
 .left p{
   font-size: 14px;
@@ -161,18 +154,12 @@ font-size: 10px;}
   margin-top:20px;
 
 width: 300px;
-  /* margin: auto; */
-  /* background-color: #353434; */
+ 
 overflow: auto;
 padding: 3px;
-  
-  
- 
 
 }
-.left{
 
- }
 .right{
 display: flex;
 
@@ -283,8 +270,6 @@ color: #26bc4b;
   .left h3{
     font-size: 16px;
   }
- 
-   
   }
 
   @media screen and (max-width:320px) {
@@ -294,10 +279,7 @@ color: #26bc4b;
       margin-top:0;
     
     width: 150px;
-  
-      
-     
-    
+
     }
   }
 
