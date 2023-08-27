@@ -255,20 +255,9 @@ color: #26bc4b;
 }
 @media screen and (max-width:450px) {
   .left p{
-    font-size: 14px;
-    color: #aaa;
-    margin-top:20px;
-  
+ 
   width: 200px;
-    /* margin: auto; */
-    background-color: #353434;
-  overflow: auto;
-  padding: 3px;
-  padding-bottom: 4px;
-    
-    
-   
-  
+
   }
 }
 @media screen and (max-width:400px) {
@@ -298,9 +287,19 @@ color: #26bc4b;
    
   }
 
-
-
-
+  @media screen and (max-width:320px) {
+    .left p{
+      font-size: 14px;
+      color: #aaa;
+      margin-top:0;
+    
+    width: 150px;
+  
+      
+     
+    
+    }
+  }
 
 
 
